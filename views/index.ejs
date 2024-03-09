@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrics Monster</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Explore Your Favorite Songs</h1>
+
+        <form id="search" method="post">
+            <input type="text" id="artistInput" name="artist">
+            <input type="text" id="titleInput" name="title">
+
+            <button type="submit" value="GO">
+        </form>
+
+        <div class="response-area">
+            <% if(title) {%>
+                <h2>
+                    <%= title %> - <%= artist %>
+                </h2>
+            <% }%>
+
+            <p>
+                <%= lyrics %>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
