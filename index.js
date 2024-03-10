@@ -18,7 +18,28 @@ app.get("/", (req, res) => {
     res.render("index.ejs", {lyrics: lyricsData});
 });
 
+app.post("/", async (req, res) => {
+    const artistName = req.body.artist;
+    const songName = req.body.title;
 
+    try {
+        const response = await axios.get(`${API_URL}/${artistName}/${songName}`);
+        lyricsData = response.data.lyrics.split("\n\n");
+
+        res.render("index.ejs", {
+            title: songName,
+            artist: artistName,
+            lyrics: lyricsData
+        });
+    } catch (error) {
+        console.error("Failed to make request: ", error.message);
+        res.render("index.ejs", {
+            title: songName,
+            artist: artistName,
+            lyrics: "error"
+        });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

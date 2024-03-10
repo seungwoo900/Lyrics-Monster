@@ -10,22 +10,32 @@
         <h1>Explore Your Favorite Songs</h1>
 
         <form id="search" method="post">
-            <input type="text" id="artistInput" name="artist">
-            <input type="text" id="titleInput" name="title">
+            <input type="text" id="artistInput" name="artist" placeholder="Artist" required>
+            <input type="text" id="titleInput" name="title" placeholder="Title" required>
 
-            <button type="submit" value="GO">
+            <button type="submit">GO!</button>
         </form>
 
         <div class="response-area">
-            <% if(title) {%>
+            <% if(lyrics != "Don't wanna sober up~🎇" && lyrics != "error") {%>
                 <h2>
                     <%= title %> - <%= artist %>
                 </h2>
-            <% }%>
-
-            <p>
-                <%= lyrics %>
-            </p>
+            <% } else if(lyrics === "error") { %>
+                <h4>Check the artist and the title again!</h4>
+            <% } else {%>
+                <% lyrics.forEach(function(line) { %>
+                    <% const lines = line.split("\n"); %>
+                    <% if(lines.length === 1) { %>
+                        <p><%= line %></p>
+                    <% } else if(lines.length > 1) { %>
+                        <% lines.forEach(function(one) { %>
+                            <p><%= one %></p>
+                        <% }) %>
+                        <br>
+                    <% } %>
+                <% }) %>
+            <% } %>
         </div>
     </div>
 </body>
