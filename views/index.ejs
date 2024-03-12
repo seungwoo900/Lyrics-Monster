@@ -9,7 +9,7 @@
     <div class="container">
         <h1>Explore Your Favorite Songs</h1>
 
-        <form id="search" method="post">
+        <form id="search" method="post" action="/">
             <input type="text" id="artistInput" name="artist" placeholder="Artist" required>
             <input type="text" id="titleInput" name="title" placeholder="Title" required>
 
@@ -17,13 +17,10 @@
         </form>
 
         <div class="response-area">
-            <% if(lyrics != "Don't wanna sober up~🎇" && lyrics != "error") {%>
+            <% if(lyrics !== "Don't wanna sober up~🎇" && lyrics !== "error") {%>
                 <h2>
                     <%= title %> - <%= artist %>
                 </h2>
-            <% } else if(lyrics === "error") { %>
-                <h4>Check the artist and the title again!</h4>
-            <% } else {%>
                 <% lyrics.forEach(function(line) { %>
                     <% const lines = line.split("\n"); %>
                     <% if(lines.length === 1) { %>
@@ -35,6 +32,8 @@
                         <br>
                     <% } %>
                 <% }) %>
+            <% } else if(lyrics === "error") { %>
+                <h4>Check the artist and the title again!</h4>
             <% } %>
         </div>
     </div>
