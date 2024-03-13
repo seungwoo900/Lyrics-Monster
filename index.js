@@ -3,7 +3,7 @@
 
 // maybe I can use image api to search for an album cover
 
-// modify ui, image api
+// modify ui
 
 import express from "express";
 import axios from "axios";
@@ -12,18 +12,18 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 
-const API_URL = "https://api.lyrics.ovh/v1";
-const SPOTIFY_API_URL = "https://api.spotify.com/v1";
-const spotifyToken = 'BQA0zY1xJCZKFNbvF6mVtTSezs5b6eJh8q15cESb3teOME1BujanWaKkxt83qRIZ_QHexKrmDWA4uEbLJhbG35TDRbzIFOfXOqKt02t-u6vfWaBBgnIVvyQHpbOcEpIkcHDWPcO5AfUT15oZCDbJihjkshQBzSgz0SY_6r12rWoLCwii6K8brwPVBz8SeLjN21mqvchxyHfn331IjjZh9E4kP0pRQud9q7gNjEIMJgNWrca9s1Qhxvhq9cJAlEMZ2dAD9He7rQDVNezNq_hk8d_MRXas';
-
-const config = {
-   headers: { Authorization: `Bearer ${spotifyToken}`},
-}
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-let lyricsData = ["Don't wanna sober up~🎇"];
+const API_URL = "https://api.lyrics.ovh/v1"; // lyrics api
+const SPOTIFY_API_URL = "https://api.spotify.com/v1"; // spotify api for an album cover
+const spotifyToken = "BQCggeyfeCMIytD184eownm6y-vxAXuQ-rFABJy3M7psqTnZ5mp1vir9WuhAyA17bhYyKVRKoQEGqvbRbqj-qqSkYMMEK4Ln7SlLueBCMTwTIorCrdU";
+
+const config = {
+   headers: { Authorization: `Bearer ${spotifyToken}`},
+} // OAuth Token
+
+let lyricsData = [];
 
 async function searchTrack(artistName, songName) {
     try {
@@ -53,7 +53,9 @@ async function getAlbumCover(artistName, songName) {
 }
 
 app.get("/", (req, res) => {
-    res.render("index.ejs", {lyrics: lyricsData});
+    res.render("index.ejs", {
+        lyrics: lyricsData,
+    });
 });
 
 app.post("/", async (req, res) => {
