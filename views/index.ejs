@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lyrics Monster</title>
-    <link rel="stylesheet" type="text/css" href="public/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
+
 <body>
     <div class="container">
 
@@ -19,7 +21,10 @@
         </form>
 
         <div class="response-area">
-            <% if(lyrics !== "Don't wanna sober up~🎇" && lyrics !== "error") {%>
+            <% if(lyrics === "error") {%>
+                <h4>Check the artist and the title again!</h4>
+            <% } else if(lyrics.length !== 0) { %>
+                
                 <h2>
                     <%= title %> - <%= artist %>
                 </h2>
@@ -35,10 +40,9 @@
                         <br>
                     <% } %>
                 <% }) %>
-            <% } else if(lyrics === "error") { %>
-                <h4>Check the artist and the title again!</h4>
             <% } %>
         </div>
     </div>
 </body>
+
 </html>
