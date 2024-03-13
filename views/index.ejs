@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lyrics Monster</title>
+    <link rel="stylesheet" type="text/css" href="public/styles/main.css">
 </head>
 <body>
     <div class="container">
-        <h1>Explore Your Favorite Songs</h1>
 
-        <form id="search" method="post" action="/">
+        <form id="search" method="post" action="/" class="form">
             <input type="text" id="artistInput" name="artist" placeholder="Artist" required>
             <input type="text" id="titleInput" name="title" placeholder="Title" required>
 
             <button type="submit">GO!</button>
+
+            <h1>Explore Your Favorite Songs</h1>
         </form>
 
         <div class="response-area">
@@ -21,6 +23,7 @@
                 <h2>
                     <%= title %> - <%= artist %>
                 </h2>
+                <img src="<%= coverUrl %>" alt="Album Cover">
                 <% lyrics.forEach(function(line) { %>
                     <% const lines = line.split("\n"); %>
                     <% if(lines.length === 1) { %>
