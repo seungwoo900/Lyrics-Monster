@@ -5,30 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lyrics Monster</title>
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/main.css" >
 </head>
 
 <body>
+    <form id="search" method="post" action="/" class="form">
+        <h1>Explore Your Favorite Songs</h1>
+        <input type="text" id="artistInput" name="artist" placeholder="Artist" required>
+        <input type="text" id="titleInput" name="title" placeholder="Title" required>
+
+        <button type="submit">GO</button>        
+    </form>
+
     <div class="container">
-
-        <form id="search" method="post" action="/" class="form">
-            <input type="text" id="artistInput" name="artist" placeholder="Artist" required>
-            <input type="text" id="titleInput" name="title" placeholder="Title" required>
-
-            <button type="submit">GO!</button>
-
-            <h1>Explore Your Favorite Songs</h1>
-        </form>
 
         <div class="response-area">
             <% if(lyrics === "error") {%>
                 <h4>Check the artist and the title again!</h4>
             <% } else if(lyrics.length !== 0) { %>
                 
+                <img src="<%= coverUrl %>" alt="Album Cover">
                 <h2>
                     <%= title %> - <%= artist %>
                 </h2>
-                <img src="<%= coverUrl %>" alt="Album Cover">
                 <% lyrics.forEach(function(line) { %>
                     <% const lines = line.split("\n"); %>
                     <% if(lines.length === 1) { %>

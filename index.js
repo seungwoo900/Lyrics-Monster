@@ -1,9 +1,9 @@
 // http://docs.lyricsovh.apiary.io/
 // https://api.lyrics.ovh/v1/artist/title
 
-// maybe I can use image api to search for an album cover
-
-// modify ui
+// retain values after the search is done
+// spotifyToken keeps changing every hour
+// cover album is too big
 
 import express from "express";
 import axios from "axios";
@@ -17,7 +17,7 @@ app.use(express.static("public"));
 
 const API_URL = "https://api.lyrics.ovh/v1"; // lyrics api
 const SPOTIFY_API_URL = "https://api.spotify.com/v1"; // spotify api for an album cover
-const spotifyToken = "BQCggeyfeCMIytD184eownm6y-vxAXuQ-rFABJy3M7psqTnZ5mp1vir9WuhAyA17bhYyKVRKoQEGqvbRbqj-qqSkYMMEK4Ln7SlLueBCMTwTIorCrdU";
+const spotifyToken = "BQDXZ94rPyTQpGFrLj_x7CblHhJtFxnlP3mrk7HFZXI3-5kfzBR53hIuWlntQi0C3jHACgWehNmpgamn0VtaI3TQhU_8dvM9iSkzqhLcR-jO7mSPUJs";
 
 const config = {
    headers: { Authorization: `Bearer ${spotifyToken}`},
@@ -55,6 +55,8 @@ async function getAlbumCover(artistName, songName) {
 app.get("/", (req, res) => {
     res.render("index.ejs", {
         lyrics: lyricsData,
+        title: "",
+        artist: ""
     });
 });
 
